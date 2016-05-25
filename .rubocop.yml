@@ -1,0 +1,88 @@
+# This file lists cops (rules) that we should follow before merging to master.
+# Cops with a severity of error will fail the build.
+
+# Any cops we haven't decided on (or haven't fixed yet) will be listed and
+# ignored in the generated file `.rubocop_todo.yml`.
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  RunRailsCops: true
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+    - '**/*.arb'
+  Exclude:
+    - 'vendor/bundle/**/*'
+    - 'db/migrate/**/*'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+
+Lint/UselessAssignment:
+  Severity: error
+  #FIXME: these could be bugs, but require a bit of looking into
+  Exclude:
+    - 'app/controllers/employees_controller.rb'
+    - 'app/serializers/vendor_array_serializer.rb'
+    - 'db/data_states/employee.rb'
+
+Metrics/ClassLength:
+  Severity: error
+  Max: 200
+  Exclude:
+    - 'app/models/bulk_upload.rb'
+    - 'app/models/lump_sum.rb'
+    - 'app/models/user/employee.rb'
+    - 'app/services/vendor_report_manager.rb'
+    - 'db/data_states/lump_sum.rb'
+    - 'app/models/vendor.rb'
+    - 'app/services/generate_tax_report.rb'
+    - 'app/models/relocation_services_opportunity.rb'
+    - 'app/form_objects/relocation_services_opportunity_form.rb'
+    - 'app/form_objects/service_needs_form.rb'
+
+Metrics/ModuleLength:
+  Severity: error
+  Max: 130
+
+Metrics/MethodLength:
+  Severity: error
+  Max: 50
+  Exclude:
+    - 'db/data_states/lump_sum.rb'
+    - 'spec/services/payments/processors/lump_sum_charge_failed_spec.rb'
+    - 'spec/services/payments/processors/lump_sum_transfer_failed_spec.rb'
+
+Metrics/LineLength:
+  Severity: error
+  AllowURI: true
+  Max: 260 # Mostly arbitrary
+  Exclude:
+    - 'db/seeds.rb'
+    - 'db/seeds/**/*'
+    - 'spec/models/bulk_upload_spec.rb'
+    - 'spec/models/city_guide_spec.rb'
+    - 'spec/models/vendor_spec.rb'
+    - 'spec/controllers/resource_controller_spec.rb'
+    - 'spec/controllers/salesforce/support/response_processor/filter_spec.rb'
+    - 'spec/factories/city_guide.rb'
+    - 'spec/features/employee/relocation_consultant_spec.rb'
+    - 'spec/jobs/reports/onboarding_report_spec.rb'
+    - 'app/admin/payments.rb'
+    - 'app/admin/user_employees.rb'
+    - 'app/models/city_guide.rb'
+    - 'app/models/reporting/relocation_transactions.rb'
+    - 'spec/controllers/concerns/content_security_policy_spec.rb'
+    - 'spec/controllers/employee/city_guides_controller_spec.rb'
+    - 'spec/controllers/resources_controller_spec.rb'
+
+Lint/BlockAlignment:
+  Severity: warning
+
+Lint/DefEndAlignment:
+  Severity: warning
+
+Style/Tab:
+  Severity: warning
+
+Style/StringMethods:
+  Enabled: false

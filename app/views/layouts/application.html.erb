@@ -1,47 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RailsDiplomacy</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <title>BetterDiplomacy</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <%= yield :includes %>
 </head>
 <body>
 
-<% if notice %><div id="notice" class="notice"><%= notice %></div><% end %>
-<% if alert %><div id="alert" class="alert"><%= alert %></div><% end %>
-
-<div class="container">
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="navbar-centerer">
-			<a class="brand" href="#">Ruby diplomacy</a>
-			<ul class="nav pull-right">
-				<li class="dropdown">
-					<%= link_to available_games_path, class: :"dropdown-toggle", "data-toggle" => :dropdown, title: :"Available games" do %>Games<b class="caret"></b>
-					<% end %>
-				<ul class="dropdown-menu">
-					<li><%= link_to :"Available games", available_games_path %></li>
-					<li><%= link_to :"Ongoing games", ongoing_games_path %></li>
-					<li><%= link_to :"Finished games", finished_games_path %></li>
-				</ul>
-				</li>
-				<% if user_signed_in? %>
-					<li><%= link_to :"Create game", new_game_path %></li>
-					<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-				<% else %>
-					<li><%= link_to "Sign in", new_user_session_path %></li>
-				<% end %>
-			</ul>
-			</div>
-		</div>
-	</div>
-	<div id="row-fluid">
 <%= yield %>
-	</div>
-</div>
 
 </body>
 </html>
